@@ -4,7 +4,8 @@
     "authors": [],
     "license": "MIT",
     "require": {
-        "guzzlehttp/guzzle": "^6.0"
+        "guzzlehttp/guzzle": "^6.0",
+        "guzzlehttp/psr7": "^1.2.3"
     },
     "autoload": {
          "classmap": ["planit.php"]
