@@ -16,7 +16,7 @@ Add `plan-it-app/planit-php-sdk` as a dependency in your project's `composer.jso
 ```php
 use Planit\API;
 
-$x = new \Planit\API(TOKEN, 
+$x = new \Planit\API(TOKEN, [
 	'ignoreSSL' => false, // default
 	'cookies_jar' => true // default is true, can set a new \GuzzleHttp\Cookie\CookieJar if you want
 ]);
