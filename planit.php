@@ -20,7 +20,7 @@ class API {
       $this->api = $api ? $api : 'https://plan-it-com.herokuapp.com';
       $this->token = $secretKey;
       $this->client = new \GuzzleHttp\Client(['cookies' => true, 'base_uri' => $this->api]);
-      $this->auth_promise = $this->client->requestAsync('POST', 'auth/token', ['body' => ['token' => $this->token]]);
+      $this->auth_promise = $this->client->requestAsync('POST', 'auth/token', ['form_params' => ['token' => $this->token]]);
       $this->auth_promise->then(function() {
         $this->auth_result = true;
       }, function() {
