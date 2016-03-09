@@ -12,7 +12,8 @@ Add `plan-it-app/planit-php-sdk` as a dependency in your project's `composer.jso
 }
 ```
 
- create new instance
+## Create new instance:
+
 ```php
 use Planit\API;
 
