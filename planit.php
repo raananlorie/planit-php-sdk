@@ -84,7 +84,56 @@ class API {
 	  return $this->create('todos', $obj);
   }
   public function updateTodo($obj) {
-	  return $this->update('todos', $obj['id'], $obj);
+	  return $this->update('todos', $obj['_id'], $obj);
+  }
+  public function removeTodo($id) {
+      return $this->remove('todos' . '/' . $id);
+  }
+  
+  /**
+   * can set an aaray of query-options:
+   * client, isHeld, isPaid, startAt, endAt,
+   * sort(default by startAt),
+   * populate(currently only "client" is available)
+  */ 
+  public function getMeetings($query = array()) {
+      return $this->get('meetings', $query);
+  }
+  public function createMeeting($obj) {
+      return $this->create('meetings', $obj);
+  }
+  public function updateMeeting($obj) {
+      return $this->update('meetings', $obj['_id'], $obj);
+  }
+  public function removeMeeting($id) {
+      return $this->remove('meetings' . '/' . $id);
+  }
+  
+  /**
+   * optional query:
+   * isInterested, isActive, select
+   */
+  public function getClients($query = array()) {
+      return $this->get('clients', $query);
+  }
+  public function createClient($obj) {
+      return $this->create('clients', $obj);
+  }
+  public function updateClient($obj) {
+      return $this->update('clients', $obj['_id'], $obj);
+  }
+  public function removeClient($id) {
+      return $this->remove('clients' . '/' . $id);
+  }
+  
+  /**
+   * amount can also be negative
+   */
+  public function addToClientBalance($clientId, $amount) {
+      return $this->create('clients/' . $clientId . '/balance', [
+          'client' => $clientId,
+          'amount' => $amount
+      ]);
   }
   
 }
