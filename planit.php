@@ -13,12 +13,12 @@ class API {
   private $auth_promise;
   private $auth_result;
     
-  function __construct($secretKey, $api, $options) {
+  function __construct($secretKey, $options) {
 	if ((!isset($secretKey)) || (!$secretKey)) {
 	  throw new Exception("no secret key");
 	}
 
-	$this->api = $api ? $api : 'https://plan-it-com.herokuapp.com';
+	$this->api = (isset($options['api']) ? $options['api'] : 'https://plan-it-com.herokuapp.com';
 	if(isset($options['ignoreSSL'])) $this->api = str_replace('https://', 'http://', $this->api);
 	
 	// can set your own cookies jar from guzzle
