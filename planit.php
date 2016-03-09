@@ -7,19 +7,25 @@ use GuzzleHttp\Psr7\Request;
 
 class API {
   private $api;
+  private $cookies;
   private $token;
   private $client;
   private $auth_promise;
   private $auth_result;
     
-  function __construct($secretKey, $api) {
+  function __construct($secretKey, $api, $options) {
 	if ((!isset($secretKey)) || (!$secretKey)) {
 	  throw new Exception("no secret key");
 	}
 
 	$this->api = $api ? $api : 'https://plan-it-com.herokuapp.com';
+	if(isset($options['ignoreSSL'])) $this->api = str_replace('https://', 'http://', $this->api);
+	
+	// can set your own cookies jar from guzzle
+	$this->cookies = (isset($options['cookies_jar'])) ? isset($options['cookies_jar']) : true;
+	
 	$this->token = $secretKey;
-	$this->client = new \GuzzleHttp\Client(['cookies' => true, 'base_uri' => $this->api, 'http_errors' => false]);
+	$this->client = new \GuzzleHttp\Client(['cookies' => $this->cookies, 'base_uri' => $this->api, 'http_errors' => false]);
 	  
 	$this->auth_promise = $this->client->requestAsync('POST', 'auth/token', ['form_params' => ['token' => $this->token]]);
 	$this->auth_promise->then(function($r) {
