@@ -43,7 +43,7 @@ class API {
   
   private function request($uri, $method = 'GET', $headers = array()) {
     if(!$this->is_auth()) return false;
-    return $this->client->request($method, $uri, $headers)->getBody()->getContents();
+    return json_decode($this->client->request($method, $uri, $headers)->getBody()->getContents());
   }
   
   private function get($resource, $params = null) {
